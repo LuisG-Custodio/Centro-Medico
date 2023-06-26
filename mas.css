@@ -1,0 +1,74 @@
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    background-color: #dddddd;
+    margin: 0;
+    padding: 20px;
+    background: url(../img/im5.jpg) no-repeat center top;  
+    background-size: 100%;
+}
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #5cb3b8;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    width: 100%;
+    background: #025974;
+    border: none;
+    padding: 12px;
+    color: rgb(249, 251, 252);
+    margin: 16px 0;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #808080;
+  }
+
+  
+  #medico {
+    font-family: 'calibri';
+  }
+  
+  #nombre {
+    text-transform: capitalize;
+    font-family: 'calibri';
+  }
+  
+  #fecha {
+    width: 50%;
+  }
+  
+  #enfermedades,
+  #alergias,
+  #antecedentes {
+    height: 80px;
+    font-family: 'calibri';
+  }
+  
+  
