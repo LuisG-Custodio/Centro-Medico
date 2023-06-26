@@ -194,6 +194,15 @@
 
     <div class="patients-by-doctor">
       <h2>Pacientes por Doctor</h2>
+      <br>
+      {% with mensajes= get_flashed_messages()  %}
+        {% if mensajes %}
+            {% for msj in mensajes %}
+                <h3>{{ msj }}</h3>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <br>
       <table>
         <tr>
           <th>Nombre del Paciente</th>
@@ -220,14 +229,14 @@
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h2>Modificar Información</h2>
-      <form>
-        <input type="text" placeholder="Nombre completo del Doctor" />
+      <form action="/guardar" method="POST">
+        <input type="text" name="txtnombre" placeholder="Nombre completo del Doctor" />
         <br>
-        <input type="text" placeholder="Cédula" />
+        <input type="text" name="txtcedula" placeholder="Cédula" />
         <br>
-        <input type="text" placeholder="Correo Electrónico" />
+        <input type="text" name="txtcorreo" placeholder="Correo Electrónico" />
         <br>
-        <input type="text" placeholder="Especialidad" />
+        <input type="text" name="txtespecialidad" placeholder="Especialidad" />
         <br>
         <br>
         <input type="submit" value="Guardar" />
