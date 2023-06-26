@@ -31,12 +31,31 @@ def guardar():
         CS= mysql.connection.cursor()
         CS.execute('insert into tb_medicos(Nombre,Cedula,Correo,Especialidad) values(%s,%s,%s,%s)',(Vnombre,Vcedula,Vcorreo,Vespecialidad))
         mysql.connection.commit()           
-    flash('Los datos del album fueron agregados correctamente')
+    flash('Los datos fueron agregados correctamente')
     return redirect(url_for('index'))
 
-@app.route('/eliminar')
-def eliminar():
-    return "Se elimino en la BD"
+@app.route('/paciente')
+def paciente():
+    return render_template('AltaPacientes.html')
+
+@app.route('/guardarPaciente', methods=['POST'])
+def guardarPaciente():
+    if request.method == 'POST':
+        #pasamos a variables el contendio de los input
+        Vnombre=request.form['txtnombre']
+        Vexpediente=request.form['txtexpediente']
+        VnombreDoc=request.form['txtnombreDoc']
+        VefechaNac=request.form['txtFechaNac']
+        Valergias=request.form['txtalergias']
+        Venfermedades=request.form['txtenfermedades']
+        Vantecedentes=request.form['txtantecedentes']
+        
+        #Conectar y ejecutar el insert
+        CS= mysql.connection.cursor()
+        CS.execute('insert into tb_pacientes(Nombre,Expediente,Nombre_Doctor,Fecha_Nacimiento,Alergias,Enfermedades,Antecedentes) values(%s,%s,%s,%s,%s,%s,%s)',(Vnombre,Vexpediente,VnombreDoc,VefechaNac,Valergias,Venfermedades,Vantecedentes))
+        mysql.connection.commit()           
+    flash('Los datos fueron agregados correctamente')
+    return redirect(url_for('paciente'))
 
 #ejecución del servidor en el puerto 5000
 if __name__ == '__main__':
