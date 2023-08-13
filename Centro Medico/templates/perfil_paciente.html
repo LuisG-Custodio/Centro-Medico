@@ -58,13 +58,11 @@
                 <div class="row">
                     <div class="col">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Editar Datos
+                        <button type="button" class="btn btn-outline-info mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="bi bi-pencil-square"></i> Editar Datos
                         </button>
-                    </div>
-                    <div class="col">
                         <form>
-                            <a href="/nueva_consulta/{{id_paciente}}"><button type="button" class="btn btn-primary">Nueva Consulta</button></a>
+                            <a href="/nueva_consulta/{{id_paciente}}"><button type="button" class="btn btn-outline-primary"><i class="bi bi-file-earmark-plus"></i> Nueva Consulta</button></a>
                         </form>
                     </div>
                 </div>
@@ -145,8 +143,8 @@
                     </div><!--Cierre row-->
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-outline-info"><i class="bi bi-pencil-square"></i> Guardar Cambios</button>
+                    <button type="reset" class="btn btn-outline-warning" data-bs-dismiss="modal"><i class="bi bi-arrow-return-left"></i> Cancelar</button>
                 </div>
             </form>
         </div>
