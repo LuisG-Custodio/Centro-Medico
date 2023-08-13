@@ -1,12 +1,50 @@
-{% extends "layout.html" %}
- 
-{% block y %}
- 
-   <h1> REGISTER </h1>
- 
-   <form action="/login" method="POST">
-      <input placeholder="Name" autocomplete="off" type="text" name="name">
-      <input type="submit" name="Register">
-   </form>
- 
+{% extends 'nav_template.html' %}
+{% block content %}
+
+{% with mensajes= get_flashed_messages()  %}
+    {% if mensajes %}
+        {% for msj in mensajes %}
+            <script>
+                Swal.fire(
+                '',
+                '{{ msj }}',
+                'info')
+            </script>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="mt-5 mb-5">
+      <h1 class="display-1 text-center">LOG-IN</h1>
+   </div>
+   <div class="container text-center mt-5 mb-5">
+      <div class="row justify-content-md-center md-5">
+          <div class="col col-md-5">
+              <div class=" card card-body align-items-center mb-5">
+                  <form action="/login" method="POST">
+                     <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputRFC" class="form-label">RFC</label>
+                            <input type="text" class="form-control" id="inputMatricula" name="txtRFC" required>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                     <div class="col-md-12">
+                         <label for="inputPassword" class="form-label">Contraseña</label>
+                         <input type="Password" class="form-control" id="inputPassword" name="txtPassword" required>
+                     </div><!--Cierre col-->
+                     </div><!--Cierre row-->
+                     <div class="row g-3">
+                        <div class="col-md-12">
+                           <button type="submit" class="btn btn-primary mt-3"> Iniciar sesion</button>
+                        </div><!--Cierre col-->
+                        </div><!--Cierre row-->
+                  </form>
+              </div><!--Cierre Card-->
+          </div><!--Cierre col-->
+      </div><!--Cierre row-->
+  </div><!--Cierre container-->
+
+
+
 {% endblock %}
