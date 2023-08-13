@@ -59,6 +59,8 @@ def paciente(id_paciente):
     data_medico=CC.fetchone()
     CC.execute("select P.nombre,P.ap+' '+P.am,Pa.nacimiento,P.correo,P.telefono,Sexo.nombre,Pa.enfermedades,Pa.alergias,Pa.antecedentes from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona inner join Sexo on Sexo.id=Pa.id_sexo where Pa.id="+id_paciente)
     paciente=CC.fetchone()
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     CC.execute("select P.ap,P.am from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona where Pa.id="+id_paciente)
     apellidos=CC.fetchone()
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
@@ -70,13 +72,13 @@ def paciente(id_paciente):
     print("doasdnofindoifas")
     print(Vnone)
     if Vnone=='None':
-        return render_template('perfil_paciente.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,Vnone=Vnone,id_paciente=id_paciente,rol=rol)
+        return render_template('perfil_paciente.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,Vnone=Vnone,id_paciente=id_paciente,rol=rol,pacientes=pacientes)
     else:
         CC.execute("select * from Consultas where id_paciente="+id_paciente+" order by fecha desc")
         print("ondoinfaoinfiodfnoifdnoifnoidfnoinoisdfnvoids")
         Vnone='1'
         consultas=CC.fetchall()
-        return render_template('perfil_paciente.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,Vnone=Vnone,consultas=consultas,id_paciente=id_paciente,rol=rol)
+        return render_template('perfil_paciente.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,Vnone=Vnone,consultas=consultas,id_paciente=id_paciente,rol=rol,pacientes=pacientes)
 
 #consulta específica de paciente    
 @app.route("/paciente/<id_paciente>/<id2>")
@@ -88,6 +90,8 @@ def paciente_consulta(id_paciente,id2):
     data_medico=CC.fetchone()
     CC.execute("select P.nombre,P.ap+' '+P.am,Pa.nacimiento,P.correo,P.telefono,Sexo.nombre,Pa.enfermedades,Pa.alergias,Pa.antecedentes from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona inner join Sexo on Sexo.id=Pa.id_sexo where Pa.id="+id_paciente)
     paciente=CC.fetchone()
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     CC.execute("select P.ap,P.am from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona where Pa.id="+id_paciente)
     apellidos=CC.fetchone()
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
@@ -97,7 +101,7 @@ def paciente_consulta(id_paciente,id2):
     consulta=CC.fetchone()
     CC.execute("select * from Consultas where id_paciente="+id_paciente+" order by fecha desc")
     consultas=CC.fetchall()
-    return render_template('perfil_paciente_consulta.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,consulta=consulta,id_paciente=id_paciente,id2=id2,consultas=consultas,rol=rol)
+    return render_template('perfil_paciente_consulta.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,consulta=consulta,id_paciente=id_paciente,id2=id2,consultas=consultas,rol=rol,pacientes=pacientes)
 
 #nueva connsulta
 @app.route("/nueva_consulta/<id_paciente>", methods=["POST", "GET"])
@@ -107,6 +111,8 @@ def nueva_consulta(id_paciente):
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
     rol=CC.fetchone()
     rol=str(rol)
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     if request.method == "POST":
         VPeso=request.form['txtPeso']
         VEstatura=request.form['txtEstatura']
@@ -129,7 +135,7 @@ def nueva_consulta(id_paciente):
     data_medico=CC.fetchone()
     CC.execute("select P.nombre,P.ap+' '+P.am,Pa.nacimiento,P.correo,P.telefono,Sexo.nombre,Pa.enfermedades,Pa.alergias,Pa.antecedentes from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona inner join Sexo on Sexo.id=Pa.id_sexo where Pa.id="+id_paciente)
     paciente=CC.fetchone()
-    return render_template("nueva_consulta.html",data_medico=data_medico,paciente=paciente,id_paciente=id_paciente,rol=rol)
+    return render_template("nueva_consulta.html",data_medico=data_medico,paciente=paciente,id_paciente=id_paciente,rol=rol,pacientes=pacientes)
 
 #editar datos paciente
 @app.route("/editar_paciente/<id_paciente>", methods=["POST"])
@@ -206,11 +212,13 @@ def administracion():
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
     rol=CC.fetchone()
     rol=str(rol)
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     CC.execute("select P.id,P.nombre+' '+P.ap+' '+P.am,M.RFC,M.cedula,R.nombre,D.nombre,M.consultorio from Medicos as M inner join Personas as P on P.id=M.id_persona inner join Roles as R on R.id=M.id_rol inner join Departamentos as D on D.id=M.id_departamento where M.visibilidad=1")
     medicos=CC.fetchall()
     CC.execute("select * from Departamentos")
     departamentos=CC.fetchall()
-    return render_template('administrador.html',medicos=medicos,departamentos=departamentos,rol=rol)
+    return render_template('administrador.html',medicos=medicos,departamentos=departamentos,rol=rol,pacientes=pacientes)
 
 #insertar nuevo medico
 @app.route("/ingresar_medico", methods=["POST"])
@@ -249,6 +257,8 @@ def editar_medico(id_persona):
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
     rol=CC.fetchone()
     rol=str(rol)
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     if request.method == "POST":
         Vnombre=request.form['txtNombre']
         VAP=request.form['txtAP']
@@ -264,7 +274,7 @@ def editar_medico(id_persona):
         CC.commit()
         flash('Se editó el médico correctamente')
         return redirect(url_for('administracion'))
-    return render_template('editar_medico.html',departamentos=departamentos,medicos=medicos,id_persona=id_persona,rol=rol)
+    return render_template('editar_medico.html',departamentos=departamentos,medicos=medicos,id_persona=id_persona,rol=rol,pacientes=pacientes)
 
 #eliminar medico
 @app.route("/eliminar_medico/<id_persona>", methods=["POST", "GET"])
@@ -277,12 +287,14 @@ def eliminar_medico(id_persona):
     CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
     rol=CC.fetchone()
     rol=str(rol)
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     if request.method == "POST":
         CC.execute("update Medicos set visibilidad=0 where id_persona="+id_persona)
         CC.commit()
         flash('Se eliminó el médico correctamente')
         return redirect(url_for('administracion'))
-    return render_template('eliminar_medico.html',departamentos=departamentos,medicos=medicos,id_persona=id_persona,rol=rol)
+    return render_template('eliminar_medico.html',departamentos=departamentos,medicos=medicos,id_persona=id_persona,rol=rol,pacientes=pacientes)
 
 #generar pdf
 @app.route("/receta/<id_paciente>/<id2>")
@@ -292,6 +304,8 @@ def receta(id_paciente,id2):
     CC=connection.cursor()
     CC.execute("select P.nombre,P.ap+' '+P.am from Medicos as M inner join Personas as P on P.id=M.id_persona inner join Departamentos as D on D.id=M.id_departamento where RFC='"+session["RFC"]+"'")
     data_medico=CC.fetchone()
+    CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
+    pacientes=CC.fetchall()
     CC.execute("select P.nombre,P.ap+' '+P.am,Pa.nacimiento,P.correo,P.telefono,Sexo.nombre,Pa.enfermedades,Pa.alergias,Pa.antecedentes from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona inner join Sexo on Sexo.id=Pa.id_sexo where Pa.id="+id_paciente)
     paciente=CC.fetchone()
     CC.execute("select P.ap,P.am from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona where Pa.id="+id_paciente)
@@ -303,7 +317,7 @@ def receta(id_paciente,id2):
     consulta=CC.fetchone()
     CC.execute("select * from Consultas where id_paciente="+id_paciente+" order by fecha desc")
     consultas=CC.fetchall()
-    return render_template('receta.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,consulta=consulta,id_paciente=id_paciente,id2=id2,consultas=consultas,rol=rol)
+    return render_template('receta.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,consulta=consulta,id_paciente=id_paciente,id2=id2,consultas=consultas,rol=rol,pacientes=pacientes)
  
 @app.route("/logout")
 def logout():
