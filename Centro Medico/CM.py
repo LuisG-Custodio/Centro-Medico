@@ -283,6 +283,27 @@ def eliminar_medico(id_persona):
         flash('Se eliminó el médico correctamente')
         return redirect(url_for('administracion'))
     return render_template('eliminar_medico.html',departamentos=departamentos,medicos=medicos,id_persona=id_persona,rol=rol)
+
+#generar pdf
+@app.route("/receta/<id_paciente>/<id2>")
+def receta(id_paciente,id2):
+    if not session.get("RFC"):
+        return redirect("/login")
+    CC=connection.cursor()
+    CC.execute("select P.nombre,P.ap+' '+P.am from Medicos as M inner join Personas as P on P.id=M.id_persona inner join Departamentos as D on D.id=M.id_departamento where RFC='"+session["RFC"]+"'")
+    data_medico=CC.fetchone()
+    CC.execute("select P.nombre,P.ap+' '+P.am,Pa.nacimiento,P.correo,P.telefono,Sexo.nombre,Pa.enfermedades,Pa.alergias,Pa.antecedentes from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona inner join Sexo on Sexo.id=Pa.id_sexo where Pa.id="+id_paciente)
+    paciente=CC.fetchone()
+    CC.execute("select P.ap,P.am from Pacientes as Pa inner join Personas as P on P.id=Pa.id_persona where Pa.id="+id_paciente)
+    apellidos=CC.fetchone()
+    CC.execute("select id_rol from Medicos where RFC='"+session["RFC"]+"'")
+    rol=CC.fetchone()
+    rol=str(rol)
+    CC.execute("select * from Consultas where id="+id2)
+    consulta=CC.fetchone()
+    CC.execute("select * from Consultas where id_paciente="+id_paciente+" order by fecha desc")
+    consultas=CC.fetchall()
+    return render_template('receta.html',data_medico=data_medico,paciente=paciente,apellidos=apellidos,consulta=consulta,id_paciente=id_paciente,id2=id2,consultas=consultas,rol=rol)
  
 @app.route("/logout")
 def logout():
