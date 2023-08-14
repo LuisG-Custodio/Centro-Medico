@@ -1,0 +1,187 @@
+{% extends 'template_perfiles.html' %}
+{%block perfil%}
+
+<div class="row">
+    <div class="col">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <figure class="figure ">
+                    <img src="https://i.ibb.co/xs0Sjs1/DOC.jpg" width="200" height="200">
+                    <figcaption class="figure-caption">
+                        <h1>{{data_medico.0}}</h1>
+                        <h1>{{data_medico.1}}</h1>
+                    </figcaption>
+                </figure>
+            </li>
+            <li class="list-group-item">
+                <ul class="list-group">
+                    <li>
+                        <i class="bi bi-envelope-at"> {{data_medico.3}}</i>
+                    </li>
+                    <li>
+                        <i class="bi bi-phone"> {{data_medico.2}}</i>
+                    </li>
+                    <li>
+                        RFC: {{data_medico.4}}
+                    </li>
+                    <li>
+                        Cedula: {{data_medico.5}}
+                    </li>
+                    <li>
+                        Departamento: {{data_medico.6}}
+                    </li>
+                    <li>
+                        Consultorio: {{data_medico.7}}
+                    </li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-info mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="bi bi-person-add"></i> Nuevo Paciente
+                        </button>
+                        <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                            <i class="bi bi-file-lock"></i> Cambiar Contraseña
+                        </button>
+                    </div>
+                </div>
+            </li>
+          </ul>
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar Nuevo Paciente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/ingresar_paciente" method="POST">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="inputMatricula" name="txtNombre" required>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputAP" class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" id="inputAP" name="txtAP" required>
+                        </div><!--Cierre col-->
+                        <div class="col-md-6">
+                            <label for="inputAM" class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" id="inputAM" name="txtAM" required>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputTelefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="inputTelefono" name="txtTelefono" required>
+                        </div><!--Cierre col-->
+                        <div class="col-md-6">
+                            <label for="inputCorreo" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="inputCorreo" name="txtCorreo" required>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputNacimiento" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="inputNacimiento" name="txtNacimiento" required>
+                        </div><!--Cierre col-->
+                        <div class="col-md-6">
+                            <label for="inputSexo" class="form-label">Sexo</label>
+                            <select class="form-select" aria-label="Default select example" id="inputSexo" name="txtSexo" required>
+                                <option value="" selected>Selecciona:</option>
+                                <option value="1">Hombre</option>
+                                <option value="2">Mujer</option>
+                              </select>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputEnfermedades" class="form-label">Enfermedades Crónicas</label>
+                            <textarea class="form-control" id="inputEnfermedades" rows="3" name="txtEnfermedades" required></textarea>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputAlergias" class="form-label">Alergias</label>
+                            <textarea class="form-control" id="inputAlergias" rows="3" name="txtAlergias" required></textarea>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputAntecedentes" class="form-label">Antecedentes Familiares</label>
+                            <textarea class="form-control" id="inputAntecedentes" rows="3" name="txtAntecedentes" required></textarea>
+                        </div><!--Cierre col-->
+                    </div><!--Cierre row-->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-info"><i class="bi bi-person-add"></i> Agregar Paciente</button>
+                    <button type="reset" class="btn btn-outline-warning" data-bs-dismiss="modal"><i class="bi bi-arrow-return-left"></i> Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+ <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar Contraseña</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/cambiar_contraseña" method="POST">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputPassword" class="form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="txtPassword" required>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputConfirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="inputConfirmPassword" name="txtConfirmPassword" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-info"><i class="bi bi-file-lock"></i> Guardar Contraseña</button>
+                    <button type="reset" class="btn btn-outline-warning" data-bs-dismiss="modal"><i class="bi bi-arrow-return-left"></i> Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+{% endblock%}
+
+{% block datos%}
+<div class=" card card-body mt-5">
+    <div class="row">
+        <div class="col">
+            <h1>
+                Pacientes
+            </h1>
+            <table class="table table-withe table-hover">
+                <thead>
+                </thead>
+                <tbody>
+                    {%for pac in pacientes%}
+                    <tr>
+                        <td><h4 class="mt-3 text-center"><a href="/paciente/{{pac.0}}">{{pac.1}}</a></h4></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

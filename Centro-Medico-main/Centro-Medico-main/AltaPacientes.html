@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro Pacientes</title>
+  <style>
+    /* Link de la imagen de fondo https://www.uwp.edu/learn/programs/images/Health-psych-header-1920-x-800.jpg */
+    body {
+      background-image: url("https://printincclothing.co.uk/wp-content/uploads/2020/05/scrubs.jpg");
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: rgb(1, 0, 5);
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 35px;
+      background-color: #e4f0f6;
+      border-radius: 10px;
+      opacity: 0.9;
+      text-align: center;
+    }
+    
+    h2 {
+      color: #3d9bc4;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #1397b8;
+      border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #1a91b9;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #265580;
+    }
+  
+    /* Estilos para la ventana emergente */
+    .modal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s;
+    }
+  
+    .modal.show {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0.3s;
+    }
+  
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      max-width: 400px;
+      text-align: center;
+    }
+  
+    .modal-content h2 {
+      margin-top: 0;
+    }
+  
+    .modal-content input {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  
+    .modal-content button {
+      padding: 10px 20px;
+      background-color: #4287f5;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <br>
+
+  <div class="container">
+    <form action="EjemploPaciente.html" id="loginForm">
+      <h2>Registro de Pacientes</h2>
+      <div class="form-group">
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingresa el nombre del Paciente">
+      </div>
+      <div class="form-group">
+        <label for="expediente">No. Expedinte:</label>
+        <input type="text" id="expediente" name="expediente" placeholder="Ingresa el no. de Expediente del Paciente">
+      </div>
+      <div class="form-group">
+        <label for="nombreDoc">Doctor Encargado:</label>
+        <input type="text" id="nombreDoc" name="nombreDoc" placeholder="Ingresa el nombre del Doctor Encargado">
+      </div>
+      <div class="form-group">
+        <label for="FechaNac">Fecha Nacimiento:</label>
+        <input type="text" id="FechaNac" name="FechaNac" placeholder="Ingresa la fehca de nacimiento del Paciente">
+      </div>
+      <div class="form-group">
+        <label for="alergias">Alergías:</label>
+        <input type="text" id="alergias" name="alergias" placeholder="Alergías del Paciente">
+      </div>
+      <div class="form-group">
+        <label for="enfermedades">Enfermedades Crónicas:</label>
+        <input type="text" id="enfermedades" name="enfermedades" placeholder="Enfermedades del Paciente">
+      </div>
+      <div class="form-group">
+        <label for="antecedentes">Antecedentes Familiares:</label>
+        <input type="text" id="antecedentes" name="antecedentes" placeholder="Antecedentes Familiares que presente el Paciente">
+      </div>
+      <div class="form-group1">
+        <input type="submit" value="Iniciar sesión">
+      </div>
+      <br>
+      <br>
+    
+    </div>
+  </body>
+  </html>
