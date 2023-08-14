@@ -1,5 +1,11 @@
 {% extends 'nav_template.html' %}
 {% block content%}
+<style>
+    body {
+        background-image: url("https://www.elationhealth.com/wp-content/uploads/2020/08/iStock-1178201255.jpg");
+        height: 1000px;
+    }
+</style>
 <div class="container" >
     <div class="row">
         <div class="col-4">
@@ -10,13 +16,11 @@
     </div>
 </div>
 <div id="invoice">
-<div class="container text-center">
+<div class="container text-center mt-2">
     <div class="row justify-content-md-center">
       <div class="col col-lg-2">
       </div>
-      <div class="col-md-auto">
-        <img src="{{url_for('static', filename='MT_logo.png')}}" alt="Logo" width="240" height="200" class="d-inline-block align-text-top">
-      </div>
+      
       <div class="col col-lg-2">
       </div>
     </div>
@@ -30,7 +34,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <figure class="figure">
-                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg" width="500" height="500" class="figure-img img-fluid rounded" alt="...">
+                                    <img src="https://i.ibb.co/1bT35Lh/Frida.png" alt="" width="200px">
                                     <figcaption class="figure-caption">
                                         <h1>{{paciente.0}}</h1>
                                         <h1>{{paciente.1}}</h1>
