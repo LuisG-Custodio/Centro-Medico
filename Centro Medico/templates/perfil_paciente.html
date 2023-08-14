@@ -21,7 +21,7 @@
             <li class="list-group-item">
                 <ul class="list-group">
                     <li>
-                        Medico: {{data_medico.0}}
+                        Medico: {{data_medico.0}} {{data_medico.1}}
                     </li>
                     <li>
                         Fecha de Nacimiento: {{paciente.2}}
@@ -54,7 +54,7 @@
                     <li>
                         Antecedentes familiares
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" >
                         {{paciente.8}}
                     </li>
                 </ul>
@@ -131,19 +131,19 @@
                     <div class="row g-3">
                         <div class="col-md-12">
                             <label for="inputEnfermedades" class="form-label">Enfermedades Crónicas</label>
-                            <textarea class="form-control" id="inputEnfermedades" rows="3" name="txtEnfermedades" required>{{paciente.6}}</textarea>
+                            <textarea class="form-control" wrap="hard"  id="inputEnfermedades" rows="3" name="txtEnfermedades" required>{{paciente.6}}</textarea>
                         </div><!--Cierre col-->
                     </div><!--Cierre row-->
                     <div class="row g-3">
                         <div class="col-md-12">
                             <label for="inputAlergias" class="form-label">Alergias</label>
-                            <textarea class="form-control" id="inputAlergias" rows="3" name="txtAlergias" required>{{paciente.7}}</textarea>
+                            <textarea class="form-control" wrap="hard" id="inputAlergias" rows="3" name="txtAlergias" required>{{paciente.7}}</textarea>
                         </div><!--Cierre col-->
                     </div><!--Cierre row-->
                     <div class="row g-3">
                         <div class="col-md-12">
                             <label for="inputAntecedentes" class="form-label">Antecedentes Familiares</label>
-                            <textarea class="form-control" id="inputAntecedentes" rows="3" name="txtAntecedentes" required>{{paciente.8}}</textarea>
+                            <textarea class="form-control" wrap="hard" id="inputAntecedentes" rows="3" name="txtAntecedentes" required>{{paciente.8}}</textarea>
                         </div><!--Cierre col-->
                     </div><!--Cierre row-->
                 </div>
