@@ -34,7 +34,6 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <figure class="figure">
-                                    <img src="https://i.ibb.co/1bT35Lh/Frida.png" alt="" width="200px">
                                     <figcaption class="figure-caption">
                                         <h1>{{paciente.0}}</h1>
                                         <h1>{{paciente.1}}</h1>
@@ -43,9 +42,6 @@
                             </li>
                             <li class="list-group-item">
                                 <ul class="list-group">
-                                    <li>
-                                        Medico: {{data_medico.0}}
-                                    </li>
                                     <li>
                                         Fecha de Nacimiento: {{paciente.2}}
                                     </li>
@@ -57,6 +53,19 @@
                                     </li>
                                     <li>
                                         Sexo: {{paciente.5}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li>
+                                        Medico: {{data_medico.0}} {{data_medico.1}}
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-envelope-at"> {{data_medico.3}}</i>
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-phone"> {{data_medico.2}}</i>
                                     </li>
                                 </ul>
                             </li>
@@ -137,12 +146,6 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <ul class="list-group list-group-flush">
-                                    <li>
-                                        <h3>Sintomatología</h3>
-                                    </li>
-                                    <li class="list-group-item">
-                                        {{consulta.10}} 
-                                    </li>
                                     <li>
                                         <h3>Diagnóstico</h3>
                                     </li>

@@ -302,7 +302,7 @@ def receta(id_paciente,id2):
     if not session.get("RFC"):
         return redirect("/login")
     CC=connection.cursor()
-    CC.execute("select P.nombre,P.ap+' '+P.am from Medicos as M inner join Personas as P on P.id=M.id_persona inner join Departamentos as D on D.id=M.id_departamento where RFC='"+session["RFC"]+"'")
+    CC.execute("select P.nombre,P.ap+' '+P.am,P.Telefono,P.Correo from Medicos as M inner join Personas as P on P.id=M.id_persona inner join Departamentos as D on D.id=M.id_departamento where RFC='"+session["RFC"]+"'")
     data_medico=CC.fetchone()
     CC.execute("select Pa.id, P.nombre+' '+P.ap+' '+P.am from Pacientes as Pa inner join Medicos as M on M.id=Pa.id_medico inner join Personas as P on P.id=Pa.id_persona where M.RFC='"+session["RFC"]+"'")
     pacientes=CC.fetchall()
